@@ -73,7 +73,8 @@ const router = createRouter({
 		// 	component: PageTest,
 		// },
 	],
-	history: createWebHistory(),
+	// BASE_URL привязан к base из vite.config
+	history: createWebHistory(import.meta.env.BASE_URL),
 })
 
 export default router

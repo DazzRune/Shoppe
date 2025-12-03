@@ -33,6 +33,8 @@
 				This is a portfolio project. Design was created by <ULink href="https://vitathemes.com/theme/shoppe/">VitaThemes</ULink>.
 				<br/>
 				Mock data is served by <ULink href="https://dummyjson.com/">DummyJSON</ULink>.
+				<br/>
+				Source <ULink href="https://github.com/DazzRune/Shoppe">repo</ULink>
 			</p>
 			<UButtonGroup class="h-[30px]">
 				<div class="md:hidden flex items-center"><span>Follow us</span>&nbsp;<hr class="w-16 h-[2px] text-primary bg-primary border-none" />&nbsp;</div>
