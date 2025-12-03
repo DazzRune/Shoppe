@@ -1,0 +1,168 @@
+@import "tailwindcss";
+@import "@nuxt/ui";
+/* Совет TW док-ции
+Определение обычных переменных CSS с помощью root может быть полезным в проектах Tailwind,
+когда вы хотите определить переменную, которая не должна быть связана с классом утилит.
+Используйте theme когда вы хотите, чтобы токен дизайна напрямую отображался в класс утилит,
+и используйте root для определения обычных переменных CSS, которые не должны иметь соответствующих классов утилит.
+*/
+
+@font-face {
+	font-family: "DM Sans";
+	src: url("/src/assets/fonts/DMSans-Regular.ttf") format("truetype");
+	font-weight: 400;
+}
+@font-face {
+	font-family: "DM Sans";
+	src: url("/src/assets/fonts/DMSans-Medium.ttf") format("truetype");
+	font-weight: 500;
+}
+@font-face {
+	font-family: "DM Sans";
+	src: url("/src/assets/fonts/DMSans-Bold.ttf") format("truetype");
+	font-weight: 700;
+}
+
+/* tw и кастомные токены, привязанные к tw-утилитам. также называемые примитивами. @theme static - компилирует все токены. если опущен - только используемые */
+/* --text-body-lg, md, sm - здесь вариации */
+@theme {
+	--container-2xl: 1440px;
+	--container-lg: 1024px;
+
+	--font-dmsans: "DM Sans", "sans-serif";
+	--text-heading1: 33px;
+	--text-heading2: 26px;
+	--text-heading3: 20px;
+	--text-heading4: 20px;
+	--text-heading5: 16px;
+
+	--text-body-lg: 16px;
+	--text-body-md: 14px;
+	--text-body-sm: 12px;
+
+	--leading-heading1: 33px;
+	--leading-heading2: 35px;
+	--leading-heading3: 26px;
+	--leading-heading4: 20px;
+	--leading-heading5: 18px;
+
+	--leading-body-lg: 16px;
+	--leading-body-md: 14px;
+	--leading-body-sm: 20px;
+
+	--color-accent: #a18a68;
+	--color-primary: #000000;
+	--color-secondary: #ffffff;
+
+	--color-neutral-dark: #707070;
+	--color-neutral: #d8d8d8;
+	--color-neutral-light: #efefef;
+
+	--color-errors: #d82700;
+
+	--animate-input-error: inputError 0.1s ease-out forwards;
+	@keyframes inputError {
+		from {
+			opacity: 0;
+			transform: translateY(-2em);
+		}
+		to {
+			opacity: 1;
+			transform: translateY(-1em);
+		}
+	}
+	@keyframes emptyCart {
+		from {
+			rotate: 0deg;
+		}
+		to {
+			rotate: -45deg;
+		}
+	}
+}
+
+/* сюда попадают заранее определенные библиотечные (например из nuxtui) токены, НЕ привязанные к утилитам
+здесь же можно добавлять кастомные или ссылаться на библиотечные через var() */
+:root {
+	--ui-container: var(--container-lg);
+	--ui-primary: var(--color-primary);
+	--ui-secondary: var(--color-secondary);
+	--ui-success: var(--color-accent);
+	--ui-info: var(--color-neutral-light);
+	--ui-warning: var(--color-accent);
+	--ui-error: var(--color-errors);
+	--ui-neutral: var(--color-neutral-dark);
+	--ui-radius: 0.1rem;
+	--ui-text: var(--color-primary);
+	--ui-text-muted: var(--color-neutral-dark);
+	--ui-text-elevated: var(--color-neutral-light);
+	--ui-text-highlighted: var(--color-primary);
+	--ui-bg: var(--color-secondary);
+	--ui-bg-elevated: var(--color-neutral-light);
+	--ui-bg-inverted: var(--color-secondary);
+
+	--heading5-mb: 10px; /* paragraph spacing */
+	--body-sm-mb: 10px; /* paragraph spacing */
+
+	@apply font-dmsans text-body-sm md:text-body-md lg:text-body-lg;
+}
+/* nuxtui переключение темы */
+.dark {
+	--color-primary: #ffffff;
+	--color-secondary: #000000;
+	--ui-bg: #0A0A0A;
+}
+
+h1 {
+	@apply text-heading1 leading-heading1 font-medium;
+}
+h2 {
+	@apply text-heading2 leading-heading2;
+}
+h3 {
+	@apply text-heading3 leading-heading3;
+}
+h4 {
+	@apply text-heading4 leading-heading4 font-medium;
+}
+h5 {
+	@apply text-heading5 leading-heading5;
+}
+h1,
+h2,
+h3,
+h4,
+h5 {
+	@apply my-[1em];
+}
+/* градиентный фон в основном для карточек товаров */
+.gradiented {
+	@apply bg-linear-to-r from-neutral-light/40 via-neutral/40 to-neutral-dark/40 bg-linear-[45deg]
+}
+
+@media (min-width: 1024px) {
+	:root {
+		--ui-container: var(--container-lg);
+	}
+}
+@media (min-width: 1440px) {
+	:root {
+		--ui-container: var(--container-2xl);
+	}
+}
+@media (max-width: 1024px) {
+	:root {
+		--text-heading1: 20px;
+		--text-heading2: 16px;
+		--text-heading3: 14px;
+
+		--leading-heading1: 26px;
+		--leading-heading2: 27px;
+
+		h1,
+		h2,
+		h3 {
+			@apply font-normal;
+		}
+	}
+}
