@@ -56,6 +56,7 @@ export function useApi() {
 		options: {
 			immediate: false,
 			beforeFetch(ctx) {
+				// @ts-ignore
 				ctx.options.headers["Authorization"] = `Bearer ${store.accessToken}`
 			},
 			updateDataOnError: true,

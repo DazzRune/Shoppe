@@ -11,10 +11,10 @@
 			class="masonry"
 		>
 			<ULink
+				v-for="(item, j) in categories.slice(i * groupLength, (i + 1) * groupLength)"
+				:key="item.slug"
 				:to="{ name: 'products', query: { category: item.slug } }"
 				raw
-				v-for="(item, j) in categories.slice(i * groupLength, (i + 1) * groupLength)"
-				:key="item"
 				class="masonry__item group"
 			>
 				<ProductImg :src="bg(j)" class="absolute w-full object-cover transition-[scale] group-hover:scale-110" :alt="item.name" />

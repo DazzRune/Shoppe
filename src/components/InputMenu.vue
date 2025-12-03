@@ -4,10 +4,12 @@
 	trailing-icon="" - скрыть иконку открытия списка
 	ignore-filter - отключить поиск по умолч. выборка приходит с сервера
 	resetSearchTermOnBlur - очистить поиск при расфокусе
-	labelKey - ! то же наименование указывать для группы, здесь title {type: 'label', title: 'Title'} -->
+	labelKey - ! то же наименование указывать для группы, здесь title {type: 'label', title: 'Title'}
+	vue ignore - ts ругается на проп labelKey="title", т.к. его тип undefined (в доке также) -->
+	<!-- @vue-ignore -->
 	<UInputMenu
 		v-model="selectedProductId"
-		v-model:search-term="search"
+		v-model:search-term.trim="search"
 		:items="menu"
 		valueKey="id"
 		labelKey="title"
@@ -22,8 +24,8 @@
 			// itemLabel: 'w-[90%]',
 		}"
 	>
-		<template #item-leading="{ item, index }">
-			<div class="w-1/6"><ProductImg v-if="item" :src="item.thumbnail" /></div>
+		<template #item-leading="{ item, index }: { item: MenuItem, index: number }">
+			<div class="w-1/6"><ProductImg v-if="isProduct(item)" :src="item.thumbnail" /></div>
 		</template>
 		<template #content-bottom>
 			<ul class="flex flex-wrap">
@@ -41,7 +43,6 @@ import { useRoute, useRouter } from "vue-router"
 import type { TProduct } from "../scripts/types"
 import { refDebounced } from "@vueuse/core";
 import { productsTransformer, useApi } from "../scripts/api"
-import type { InputMenuItem } from "@nuxt/ui";
 
 const { useDummy } = useApi()
 
@@ -74,11 +75,14 @@ const products = computed(() => getProducts.data.value?.products || [])
 const productsByCategories = ref(new Map())
 const categories = computed(() => [...productsByCategories.value.keys()])
 
+type Product = { id: number, title: string, thumbnail: string }
+type MenuItem = { type: "label", title: string } | Product | { type: "separator" }
 // дополнительно подгоняем под формат для передачи в <UInputMenu>
-const menu = computed((): InputMenuItem[] => {
-	return [...productsByCategories.value.entries()].reduce((products: InputMenuItem[], [k, v]) => {
+const menu = computed((): (MenuItem)[] => {
+	return [...productsByCategories.value.entries()].reduce((products: (MenuItem)[], [k, v]) => {
 		// title - здесь имя категории
-		products.push({ type: "label", title: k }, ...v, { type: "separator" })
+		const to = v.map((p: Product) => ({ id: p.id, title: p.title ?? "", thumbnail: p.thumbnail ?? "" }))
+		products.push({ type: "label", title: k }, ...to, { type: "separator" })
 		return products
 	}, [])
 })
@@ -94,6 +98,11 @@ watch(products, (prods, oldValue) => {
 		else productsByCategories.value.set(p.category, [p])
 	})
 })
+
+// type guard
+function isProduct(value: MenuItem): value is Product {
+	return value && "id" in value && "title" in value && "thumbnail" in value
+}
 </script>
 
 <style scoped></style>

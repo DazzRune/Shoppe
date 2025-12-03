@@ -8,7 +8,7 @@
 		<div class="md:flex gap-x-[5%]">
 			<div v-if="isFilterShown" class="md:w-1/4">
 				<div class="sticky top-20 [&>*]:py-4">
-					<UInput placeholder="Search..." v-model="search" :loading="getProducts.isFetching.value" :ui="{
+					<UInput placeholder="Search..." v-model.trim="search" :loading="getProducts.isFetching.value" :ui="{
 						trailing: 'p-0 h-[40%] top-1/2 right-0 -translate-y-1/2'
 					}">
 						<template v-if="search?.length" #trailing>
