@@ -1,7 +1,4 @@
-Live [demo](https://dazzrune.github.io/Shoppe)
-
-# Vue 3 + TypeScript + Vite
-
-This template should help get you started developing with Vue 3 and TypeScript in Vite. The template uses Vue 3 `<script setup>` SFCs, check out the [script setup docs](https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup) to learn more.
-
-Learn more about the recommended Project Setup and IDE Support in the [Vue Docs TypeScript Guide](https://vuejs.org/guide/typescript/overview.html#project-setup).
+Lite fake shop with auth and full customer purchase cycle. Live [demo](https://dazzrune.github.io/Shoppe)<br/>
+This is a portfolio project based on Vue 3, TailwindCSS 4.1 and Nuxt UI 3.3.<br/>
+Design was created by [VitaThemes](https://vitathemes.com/theme/shoppe/).<br/>
+Mock data is served by [DummyJSON](https://dummyjson.com/).<br/>
