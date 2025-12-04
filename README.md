@@ -1,4 +1,4 @@
-Live [demo](https://dazzrune.github.io/ShoppeApp/)
+Live [demo](https://dazzrune.github.io/Shoppe)
 
 # Vue 3 + TypeScript + Vite
 
